@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.index')
 
 @section('container')
 <div class="table-responsive">
@@ -7,16 +7,21 @@
       <tr>
         <th><strong>No</strong></th>
         <th><strong>Nama File</strong></th>
+        <th><strong>Type</strong></th>
+        <th><strong>Tanggal Data</strong></th>
         <th><strong>Action</strong></th>
       </tr>
     </thead>
     <tbody>
-      @foreach($data as $k)
+      @foreach($file as $k)
         <tr>
-          <th>{{$k -> id}}</th>
+          <th>{{ $loop->iteration }}</th>
           <th>{{$k -> nama_file}}</th>
+          <th>{{$k -> type}}</th>
+          <th>{{$k -> date_data}}</th>
           <th>
-            
+            <button type="button" class="btn btn-success">Download</button>
+            <a href="hapus/{{ $k->id }}"><button type="button" class="btn btn-danger">Hapus</button></a>
           </th>
         </tr>
       @endforeach

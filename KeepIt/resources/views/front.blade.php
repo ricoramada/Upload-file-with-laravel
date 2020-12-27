@@ -1,7 +1,7 @@
-@extends('layout.main')
+@extends('layout.index')
 
 @section('container')
-<div class="row">
+<div class="column">
   <div class="container">
     @if(count($errors) > 0)
     <div class="alert alert-danger">
@@ -20,21 +20,23 @@
 
      <form action="kirim" method="post" enctype="multipart/form-data">
      @csrf
+
          <div class="form-group">
-             <label class="lable" for="nama_file">File Name </label>
-             <div class="control">
-                 <input type="text" class="form-control" name="nama_file" placeholder="Title" value="" required>
-             </div>
+           <label class="form-label" for="nama_file">File Name </label>
+
+           <div class="control">
+             <input type="text" class="form-control" name="nama_file" placeholder="Title" value="" required>
+           </div>
          </div>
          <div class="form-group">
-             <div class="control">
-                  <input type="file" class="form-control" name="file" aria-describedby="fileHelp">
-             </div>
-          </div>
+           <div class="control">
+             <input type="file" class="form-control" name="file" aria-describedby="fileHelp" required>
+           </div>
+         </div>
          <div class="form-group">
-             <div class="control">
-                 <button type="submit" class="btn btn-primary">Upload File</button>
-             </div>
+           <div class="control">
+             <button type="submit" class="btn btn-primary">Upload File</button>
+           </div>
          </div>
      </form>
   </div>

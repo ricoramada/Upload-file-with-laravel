@@ -3,36 +3,47 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\File;
+use Illuminate\Support\Facades\File;
+use App\Data;
+use Validator;
 
 class Upload extends Controller
 {
-    public function page()
+    public function upload(Request $req)
     {
-       return view('front');
+      $this->validate($req,[
+        'file' => 'required|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf',
+      ]);
+      $destinationPath = public_path('fileToUpload');
+      $data = $req->file('file');
+
+      $input['nama_file'] = time().'.'.$data->getClientOriginalExtension();
+      $data->move($destinationPath, $input['nama_file']);
+      $type = $data->getClientMimeType();
+
+      $file = new Data();
+      $file->id_kontak = Session()->get('id');
+      $file->nama_file = request('nama_file');
+      $file->type = $type;
+
+      $file->save();
+      //return view('front');
+      return back()->with('success', 'File Uploaded Successfully')->with('path', $input['nama_file']);
     }
 
-    // Upload File
-      public function index(Request $request)
-      {
-        $destinationPath = public_path('fileToUpload');
-        $data = $request->file('file');
-
-        $input['nama_file'] = time().'.'.$data->getClientOriginalExtension();
-        $data->move($destinationPath, $input['nama_file']);
-
-        $file = new File();
-        $file->nama_file = request('nama_file');
-
-        $file->save();
-        //return view('front');
-        return back()->with('success', 'File Uploaded Successfully')->with('path', $input['nama_file']);
-      }
-
-    // Tampil Database
-    public function data()
+    public function hapus($id)
     {
-        $data = File::all();
-        return view('formdata',['data'=>$data]);
+        // hapus file
+        $files = Data::where('id',$id)->first();
+        File::delete('fileToUpload/'.$files->file);
+
+        // hapus data
+        Data::where('id',$id)->delete();
+        // $hapus = Data::findOrFail($id);
+        // if ($hapus->path) {
+        //     unlink($hapus->public_path('fileToUpload'));
+        // }
+        // $hapus->delete();
+        return redirect('/');
     }
 }
