@@ -23,12 +23,6 @@
 
          <div class="form-group">
            <label class="form-label" for="nama_file">File Name </label>
-
-           <div class="control">
-             <input type="text" class="form-control" name="nama_file" placeholder="Title" value="" required>
-           </div>
-         </div>
-         <div class="form-group">
            <div class="control">
              <input type="file" class="form-control" name="file" aria-describedby="fileHelp" required>
            </div>

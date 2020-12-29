@@ -9,6 +9,7 @@
         <th><strong>Nama File</strong></th>
         <th><strong>Type</strong></th>
         <th><strong>Tanggal Data</strong></th>
+        <th><strong>Path Data</strong></th>
         <th><strong>Action</strong></th>
       </tr>
     </thead>
@@ -19,8 +20,9 @@
           <th>{{$k -> nama_file}}</th>
           <th>{{$k -> type}}</th>
           <th>{{$k -> date_data}}</th>
+          <th>{{$k -> path}}</th>
           <th>
-            <button type="button" class="btn btn-success">Download</button>
+            <a href="{{ route('download', $k->id) }}"><button type="button" class="btn btn-success">Download</button></a>
             <a href="hapus/{{ $k->id }}"><button type="button" class="btn btn-danger">Hapus</button></a>
           </th>
         </tr>

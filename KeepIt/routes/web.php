@@ -19,6 +19,7 @@ Route::group(['middleware' => 'cek_login'], function(){
   Route::get('/addproject', 'PageController@addproject');
   Route::get('/', 'PageController@data');
   Route::get('hapus/{id}', 'Upload@hapus');
+  Route::get('download/{id}', 'Upload@download')->name('download');
 });
 
 Route::get('login', 'LoginController@login');
