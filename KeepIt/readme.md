@@ -72,5 +72,5 @@ The Laravel framework is open-source software licensed under the [MIT license](h
 
 ## Make By
 
-Mukhamad Rico Ramada
-Aby Sucahyo
+- Mukhamad Rico Ramada
+- Aby Sucahyo
